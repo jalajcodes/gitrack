@@ -1,0 +1,23 @@
+{
+    "dev": {
+        "awscloudformation": {
+            "AuthRoleName": "amplify-gitfo-dev-204132-authRole",
+            "UnauthRoleArn": "arn:aws:iam::630600017733:role/amplify-gitfo-dev-204132-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::630600017733:role/amplify-gitfo-dev-204132-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "amplify-gitfo-dev-204132-deployment",
+            "UnauthRoleName": "amplify-gitfo-dev-204132-unauthRole",
+            "StackName": "amplify-gitfo-dev-204132",
+            "StackId": "arn:aws:cloudformation:us-east-1:630600017733:stack/amplify-gitfo-dev-204132/428fb690-7520-11eb-9e5f-0e797c2a6a1d",
+            "AmplifyAppId": "d1bycrk5tmifaz"
+        },
+        "categories": {
+            "hosting": {
+                "amplifyhosting": {
+                    "appId": "d1bycrk5tmifaz",
+                    "type": "manual"
+                }
+            }
+        }
+    }
+}
