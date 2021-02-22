@@ -11,15 +11,15 @@ interface AuthContext {
 
 const authContext = createContext<Partial<AuthContext>>({});
 
-export function AuthProvider({ children }) {
+export const AuthProvider: React.FC = ({ children }) => {
   const auth = useProvideAuth();
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
-}
+};
 
-export const useAuth = () => {
+export const useAuth = (): Partial<AuthContext> => {
   const auth = useContext(authContext);
-  if (!auth.signinWithGithub) {
-    throw new Error("Can't use Auth outside of its provider tree.");
+  if (typeof auth === 'undefined') {
+    throw new Error('Auth can only be used inside a Provider');
   }
   return auth;
 };
