@@ -4,6 +4,7 @@ import { AuthProvider } from '@lib/auth';
 import { Global, css } from '@emotion/react';
 import theme from '@styles/theme';
 import { AppProps } from 'next/app';
+import Layout from '@components/Layout';
 
 const GlobalStyles = () => {
   return (
@@ -29,6 +30,29 @@ const GlobalStyles = () => {
             flex-direction: column;
             min-height: 100vh;
           }
+
+          ::-webkit-scrollbar {
+            width: 5px;
+            height: 5px;
+          }
+
+          /* Track */
+          ::-webkit-scrollbar-track {
+            background: #edf2f7;
+            border: 4px solid transparent;
+            background-clip: content-box;
+          }
+
+          /* Handle */
+          ::-webkit-scrollbar-thumb {
+            background: #5094f0;
+            /* border: 1px solid rgb(0, 0, 0); */
+          }
+
+          /* Handle on hover */
+          ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+          }
         `}
       />
     </>
@@ -39,13 +63,15 @@ const App: React.VFC<AppProps> = ({ Component, pageProps }) => {
   return (
     <>
       <Head>
-        <title>Okie</title>
+        <title>GiTrack</title>
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <ChakraProvider theme={theme}>
         <AuthProvider>
           <GlobalStyles />
-          <Component {...pageProps} />
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
         </AuthProvider>
       </ChakraProvider>
     </>

@@ -16,7 +16,8 @@ module.exports = {
   rules: {
     'react/prop-types': 'off',
     'react/react-in-jsx-scope': 'off',
-    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }]
+    'react/jsx-filename-extension': [1, { extensions: ['.ts', '.tsx'] }],
+    '@typescript-eslint/explicit-module-boundary-types': 'off'
   },
   settings: {
     react: {

@@ -1,11 +1,23 @@
 import React, { useState, useEffect, createContext, useContext } from 'react';
+import Router from 'next/router';
 import { createUser } from './db';
 import firebase from './firebase';
+import localforage from '../node_modules/localforage/dist/localforage';
+
+interface AuthUser {
+  uid: string;
+  email: string;
+  displayName: string;
+  avatar: string;
+  provider: string;
+  token: string;
+  username: string;
+}
 
 interface AuthContext {
-  user: Partial<firebase.User>;
-  signinWithGithub: () => void;
-  signinWithTwitter: () => void;
+  user: AuthUser;
+  token: string | null;
+  signinWithGithub: (redirect?: string) => void;
   signOut: () => void;
 }
 
@@ -25,58 +37,78 @@ export const useAuth = (): Partial<AuthContext> => {
 };
 
 function useProvideAuth() {
-  const [user, setUser] = useState<Partial<firebase.User>>();
+  const [user, setUser] = useState<AuthUser>();
+  const { username, token } = localforage.getItem('userData');
 
-  const handleUser = (rawFirebaseUser) => {
+  const handleUser = async ({ rawFirebaseUser, token, username }) => {
     if (rawFirebaseUser) {
-      const user = formatUser(rawFirebaseUser);
-      createUser(user.uid, user);
+      const user = formatUser(rawFirebaseUser, username, token);
       setUser(user);
       return user;
     } else {
       setUser(null);
+      try {
+        await localforage.removeItem('userData');
+      } catch (error) {
+        console.log(error);
+      }
       return false;
     }
   };
 
-  const signinWithGithub = async () => {
+  const signinWithGithub = async (redirect: string) => {
     const response = await firebase
       .auth()
       .signInWithPopup(new firebase.auth.GithubAuthProvider());
 
-    handleUser(response.user);
-  };
-
-  const signinWithTwitter = async () => {
-    const response = await firebase
-      .auth()
-      .signInWithPopup(new firebase.auth.TwitterAuthProvider());
-
-    handleUser(response.user);
+    const rawFirebaseUser = response.user;
+    const credential = response.credential as firebase.auth.OAuthCredential;
+    const token = credential.accessToken;
+    const githubUsername = response.additionalUserInfo.username;
+    const user = formatUser(rawFirebaseUser, githubUsername, token);
+    try {
+      await localforage.setItem('userData', { ...user });
+    } catch (error) {
+      console.log(error);
+    }
+    if (rawFirebaseUser && credential && githubUsername) {
+      createUser(user.uid, user);
+      handleUser({
+        rawFirebaseUser,
+        token: credential.accessToken,
+        username: githubUsername
+      });
+    }
+    if (redirect) {
+      Router.push(redirect);
+    }
   };
 
   const signOut = async () => {
+    Router.push('/');
     await firebase.auth().signOut();
-    handleUser(false);
+    setUser(null);
   };
 
   useEffect(() => {
-    const unsubscribe = firebase
-      .auth()
-      .onAuthStateChanged((user) => handleUser(user));
+    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
+      handleUser({ rawFirebaseUser: user, token, username });
+    });
 
     return () => unsubscribe();
   }, []);
 
-  return { user, signinWithGithub, signinWithTwitter, signOut };
+  return { user, signinWithGithub, signOut };
 }
 
-const formatUser = (user: firebase.User) => {
+const formatUser = (user: firebase.User, username, token) => {
   return {
     uid: user.uid,
     email: user.email,
     displayName: user.displayName,
     avatar: user.photoURL,
-    provider: user.providerData[0].providerId
+    provider: user.providerData[0].providerId,
+    token,
+    username
   };
 };
