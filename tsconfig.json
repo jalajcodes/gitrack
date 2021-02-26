@@ -25,6 +25,7 @@
       "@lib/*": ["lib/*"],
       "@styles/*": ["styles/*"],
       "@utils/*": ["utils/*"],
+      "@assets/*": ["assets/*"],
     }
   },
   "include": [

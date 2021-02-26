@@ -16,7 +16,6 @@ interface AuthUser {
 
 interface AuthContext {
   user: AuthUser;
-  token: string | null;
   signinWithGithub: (redirect?: string) => void;
   signOut: () => void;
 }

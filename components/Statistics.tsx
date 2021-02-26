@@ -47,22 +47,22 @@ const Statistics = ({ stats: userStats }) => {
 
               <div className="info">
                 {stats.company && (
-                  <Text color="#5094F0">
-                    <OrgIcon fill="#5094F0" mr="1" mb="1" />
+                  <Text color="#CC579E">
+                    <OrgIcon mr="1" mb="1" />
                     {stats.company}
                   </Text>
                 )}
 
                 {stats.location && (
-                  <Text color="#5094F0">
-                    <LocationIcon fill="#5094F0" mr="1" mb="1" />
+                  <Text color="#EF5125">
+                    <LocationIcon mr="1" mb="1" />
                     {stats.location}
                   </Text>
                 )}
 
                 {stats.created_at && (
                   <Text color="#5094F0">
-                    <CalendarIcon fill="#5094F0" mr="1" mb="1" />
+                    <CalendarIcon mr="1" mb="1" />
                     Joined{' '}
                     {new Date(stats.created_at).toLocaleDateString('en-US', {
                       month: 'long',

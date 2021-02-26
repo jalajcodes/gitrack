@@ -1,3 +1,6 @@
 # Github Issues Tracker
 
-Applicstion to track assigned issues.
+Help Open Source Enthusiasts track their progress in a nice friendly environment.
+
+
+> Logos, Icons and Illustrations are from Freepik.com, ChakraUI, Icomoon.io

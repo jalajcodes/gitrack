@@ -11,16 +11,6 @@ const Footer = () => {
           Home
         </Link>
       </NextLink>
-      <NextLink href="/profile" passHref>
-        <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-          Profile
-        </Link>
-      </NextLink>
-      <NextLink href="/track" passHref>
-        <Link fontSize="sm" mr={4} fontWeight="medium" color="gray.500">
-          Tracker
-        </Link>
-      </NextLink>
       {auth.user && (
         <Link
           onClick={() => auth.signOut()}

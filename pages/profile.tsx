@@ -1,7 +1,7 @@
 import { Box, Spinner, useToast } from '@chakra-ui/react';
 import Statistics from '@components/Statistics';
 import { useAuth } from '@lib/auth';
-import { getUser } from '@utils/getUser';
+import { getUser } from '@utils/getData';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import localforage from '../node_modules/localforage/dist/localforage';
@@ -38,7 +38,8 @@ const Profile = () => {
       const userData = await localforage.getItem('userData');
       if (userData && userData.token) {
         const data = await getUser(
-          auth?.user?.token ? auth.user.token : userData.token
+          auth?.user?.token ? auth.user.token : userData.token,
+          auth
         );
         console.log(data);
         setStats(data);

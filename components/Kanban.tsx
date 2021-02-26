@@ -1,43 +1,50 @@
 import { useEffect, useState } from 'react';
-// import Board from '@lourenci/react-kanban';
 import Board from 'react-trello';
-// import '@lourenci/react-kanban/dist/styles.css';
 import localforage from '../node_modules/localforage/dist/localforage';
 
-const data = {
+const mockData = {
   lanes: [
     {
-      id: 'lane1',
-      title: 'Planned Tasks',
-      label: '2/2',
+      id: 'welcome',
+      title: '🥳 Welcome!',
       cards: [
         {
           id: 'Card1',
-          title: 'Write Blog',
-          description: 'Can AI make memes',
-          label: '30 mins',
-          draggable: false
-        },
-        {
-          id: 'Card2',
-          title: 'Pay Rent',
-          description: 'Transfer via NEFT',
-          label: '5 mins',
-          metadata: { sha: 'be312a1' }
+          title: 'Hi there! Welcome.',
+          description:
+            'You can fetch issues assigned to you and arrange them here. State will be saved for the next time. Delete this lane from the three dots menu.',
+          label: 'Label'
         }
       ]
     },
+    // {
+    //   id: 'recently-commented-issue',
+    //   title: '⏰ Recently Commented Issues',
+    //   cards: []
+    // },
     {
-      id: 'lane2',
-      title: 'Completed',
-      label: '0/0',
+      id: 'issues',
+      title: '👩‍🏫 Issues',
       cards: []
     },
     {
-      id: 'lane3',
-      title: 'Completed',
-      label: '0/0',
-      draggable: true,
+      id: 'wip',
+      title: '🔨 Work in Progress',
+      cards: []
+    },
+    {
+      id: 'pr',
+      title: '✅ Created PR',
+      cards: []
+    },
+    {
+      id: 'changes',
+      title: '🔂 Change Requested',
+      cards: []
+    },
+    {
+      id: 'merged',
+      title: "🎉 Merged PR's",
       cards: []
     }
   ]
@@ -52,55 +59,34 @@ const updateBoard = async (info) => {
   }
 };
 
-const Kanban = ({ issues }) => {
-  const [boardData, setBoardData] = useState(data);
+const Kanban = ({ eventBusHandle }) => {
+  const [boardData, setBoardData] = useState(mockData);
 
   useEffect(() => {
     const fetchBoard = async () => {
-      const board = await localforage.getItem('board');
-      setBoardData(board);
+      try {
+        const board = await localforage.getItem('board');
+        if (board) {
+          setBoardData(board);
+        }
+      } catch (error) {
+        console.log(error);
+      }
     };
     fetchBoard();
   }, []);
 
-  useEffect(() => {
-    setBoardData(issues);
-  }, [issues]);
-
   return (
     <Board
-      data={boardData ? boardData : data}
+      data={boardData ? boardData : mockData}
       collapsibleLanes={true}
+      eventBusHandle={eventBusHandle}
       draggable={true}
       editable={true}
       canAddLanes={true}
       editLaneTitle={true}
       onDataChange={updateBoard}
     />
-    // <Board
-    //   allowRemoveLane
-    //   allowRenameColumn
-    //   allowRemoveCard
-    //   allowAddColumn
-    //   allowRemoveColumn
-    //   onLaneRemove={console.log}
-    //   onCardRemove={console.log}
-    //   onLaneRename={console.log}
-    //   initialBoard={boardData}
-    //   allowAddCard={{ on: 'top' }}
-    //   onNewCardConfirm={(draftCard) => ({
-    //     id: new Date().getTime(),
-    //     ...draftCard
-    //   })}
-    //   onNewColumnConfirm={(draftColumn) => ({
-    //     id: new Date().getTime(),
-    //     ...draftColumn
-    //   })}
-    //   onColumnRemove={updateBoard}
-    //   onCardNew={updateBoard}
-    //   onCardDragEnd={updateBoard}
-    //   onColumnNew={updateBoard}
-    // />
   );
 };
 
