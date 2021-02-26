@@ -17,13 +17,13 @@ const BoardWrapper = styled.div`
     margin: 8px 8px 10px 8px;
   }
 
-  .react-trello-lane.jyepsf {
+  .react-trello-lane.sc-iBPRYJ {
     background-color: transparent;
     box-shadow: 0 4px 24px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
     margin: 5px 25px 5px 0;
   }
 
-  .react-trello-board.cvXeTF {
+  .react-trello-board.sc-jSgupP {
     background-color: transparent;
     -ms-overflow-style: none;
     scrollbar-width: none;
