@@ -5,8 +5,8 @@ export const getUser = async (token, auth) => {
   const octo = new Octokit({
     auth: token
   });
-  octo.hook.error('request', async (error, options) => {
-    console.log('error', error.status, options);
+  octo.hook.error('request', async (error) => {
+    // console.log('error', error.status, options);
     if (error.status === 401) {
       auth.signOut();
     }
@@ -20,8 +20,8 @@ export const getIssues = async (username, auth) => {
   const octo = new Octokit({
     auth: token
   });
-  octo.hook.error('request', async (error, options) => {
-    console.log('error', error.status, options);
+  octo.hook.error('request', async (error) => {
+    // console.log('error', error.status, options);
     if (error.status === 401) {
       auth.signOut();
     }
@@ -30,32 +30,10 @@ export const getIssues = async (username, auth) => {
   const rawIssueData = await octo.search.issuesAndPullRequests({
     q: searchString
   });
-  console.log('raw', rawIssueData);
+  // console.log('raw', rawIssueData);
 
   const formattedIssues = formatIssues(rawIssueData);
   return formattedIssues;
-};
-
-export const getMergedPr = async (username, auth) => {
-  const { token } = await localforage.getItem('userData');
-  const octo = new Octokit({
-    auth: token
-  });
-  octo.hook.error('request', async (error, options) => {
-    console.log('error', error.status, options);
-    if (error.status === 401) {
-      auth.signOut();
-    }
-  });
-
-  const searchString = `is:merged is:pr author:${username} archived:false `;
-  const rawData = await octo.search.issuesAndPullRequests({
-    q: searchString
-  });
-  console.log(rawData);
-
-  // const formattedPrs =
-  // return recentIssues;
 };
 
 const formatIssues = (rawIssues) => {

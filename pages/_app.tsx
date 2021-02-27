@@ -64,7 +64,7 @@ const App: React.VFC<AppProps> = ({ Component, pageProps }) => {
     <>
       <Head>
         <title>GiTrack</title>
-        <link rel="icon" href="/favicon.ico" />
+        <link rel="icon" href="/logo.png" />
       </Head>
       <ChakraProvider theme={theme}>
         <AuthProvider>

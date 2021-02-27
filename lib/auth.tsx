@@ -90,8 +90,11 @@ function useProvideAuth() {
   };
 
   useEffect(() => {
-    const unsubscribe = firebase.auth().onAuthStateChanged((user) => {
-      handleUser({ rawFirebaseUser: user, token, username });
+    const unsubscribe = firebase.auth().onAuthStateChanged(async (user) => {
+      const userData = await localforage.getItem('userData');
+      if (userData) {
+        handleUser({ rawFirebaseUser: user, token, username });
+      }
     });
 
     return () => unsubscribe();

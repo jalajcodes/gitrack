@@ -52,7 +52,7 @@ const mockData = {
 
 const updateBoard = async (info) => {
   try {
-    console.log(info);
+    // console.log(info);
     await localforage.setItem('board', info);
   } catch (error) {
     console.log('Unable to update board.');

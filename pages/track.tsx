@@ -127,7 +127,7 @@ const Kanban = () => {
             auth?.user?.username ? auth.user.username : userData.username,
             auth
           );
-          console.log('from github', issuesFromGithub);
+          // console.log('from github', issuesFromGithub);
           setIssues(issuesFromGithub);
           setLoading(false);
         }

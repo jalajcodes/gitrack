@@ -1,34 +1,30 @@
 import { Image } from '@chakra-ui/image';
-import { Box, Divider, Flex, Heading, Text } from '@chakra-ui/layout';
-import { useToast } from '@chakra-ui/toast';
-import { useAuth } from '@lib/auth';
-import { useEffect } from 'react';
+import {
+  Box,
+  Flex,
+  Heading,
+  List,
+  ListIcon,
+  ListItem,
+  Text
+} from '@chakra-ui/layout';
+import { CheckCircle } from '@components/Icons';
 
 const Home: React.VFC = () => {
-  const auth = useAuth();
-  const toast = useToast();
-  // useEffect(() => {
-  //   if (!auth?.user?.token || !auth?.user?.username) {
-  //     auth.signOut();
-  //     toast({
-  //       title: 'Token Expired',
-  //       description: 'Please login again.',
-  //       status: 'warning',
-  //       duration: 5000,
-  //       position: 'top',
-  //       isClosable: true
-  //     });
-  //   }
-  // }, []);
-
   return (
     <>
-      <Box display="flex" alignItems="center" justifyContent="center" w="full">
-        <Box p="10" minW="900px" borderRadius="10px" boxShadow="md" bg="white">
+      <Box
+        m="5"
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        w="full"
+      >
+        <Box p="10" borderRadius="10px" boxShadow="md" bg="white">
           <Flex mt="-5" mb="-3" alignItems="center" justifyContent="center">
             <Image w="100px" src="./logo.png" />
           </Flex>
-          <Heading as="h1" mt="0" mb="4" textAlign="center">
+          <Heading as="h1" mt="0" mb="10" textAlign="center">
             🥳{' '}
             <Text color="#5094F0" display="inline">
               Welcome
@@ -40,7 +36,72 @@ const Home: React.VFC = () => {
               GiTrack! 🥳
             </Text>
           </Heading>
-          <Divider />
+          <Flex wrap="wrap" justifyContent="center" alignItems="center">
+            <Box
+              mr={[0, 0, 10]}
+              w={[250, 400]}
+              shadow="lg"
+              borderRadius="lg"
+              padding="5"
+            >
+              <Image
+                m="auto"
+                mb="5"
+                src="./stats.svg"
+                borderRadius="50%"
+                w="28"
+              />
+              <Text>
+                <List spacing={3}>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Statistics from Github
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Total Pull Requests and Issues
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Current Streak Info
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Most Used Languages
+                  </ListItem>
+                </List>
+              </Text>
+            </Box>
+            <Box w={[250, 400]} p="5" shadow="lg" borderRadius="lg">
+              <Image
+                m="auto"
+                mb="5"
+                src="./issue.svg"
+                borderRadius="50%"
+                w="28"
+              />
+              <Text>
+                <List spacing={3}>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Track Issues on Kanban Board
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Rearrange and Reorder cards and lanes
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Fetch assigned issues from github
+                  </ListItem>
+                  <ListItem>
+                    <ListIcon as={CheckCircle} fill="green" />
+                    Persistent board state
+                  </ListItem>
+                </List>
+              </Text>
+            </Box>
+          </Flex>
         </Box>
       </Box>
     </>
