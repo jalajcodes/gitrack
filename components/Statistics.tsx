@@ -1,7 +1,3 @@
-// import Octicon, { Briefcase, Calendar, Location } from '@primer/octicons-react';
-// import UserInfoStyles from './styles/UserInfoStyles';
-// import { Section } from '../style';
-
 import { Image } from '@chakra-ui/image';
 import { Box, Flex, Heading, HStack, Text } from '@chakra-ui/layout';
 import { useAuth } from '@lib/auth';
@@ -14,7 +10,7 @@ const Statistics = ({ stats: userStats }) => {
   return (
     <Box w="full" display="grid" placeItems="center">
       <Box
-        maxWidth="900px"
+        maxWidth="800px"
         // height="240px"
         m="5"
         bg="white"
@@ -23,11 +19,10 @@ const Statistics = ({ stats: userStats }) => {
         overflow="hidden"
       >
         {stats && (
-          // <UserInfoStyles>
-          <Box display="flex">
+          <Box maxW="540px" display="flex">
             {stats.avatar_url && (
               <Image
-                boxSize="300px"
+                width="270px"
                 objectFit="cover"
                 src={stats.avatar_url}
                 alt={auth?.user?.username}
@@ -45,33 +40,31 @@ const Statistics = ({ stats: userStats }) => {
                 </>
               )}
 
-              <div className="info">
-                {stats.company && (
-                  <Text color="#CC579E">
-                    <OrgIcon mr="1" mb="1" />
-                    {stats.company}
-                  </Text>
-                )}
+              {stats.company && (
+                <Text>
+                  <OrgIcon mr="1" mb="1" />
+                  {stats.company}
+                </Text>
+              )}
 
-                {stats.location && (
-                  <Text color="#EF5125">
-                    <LocationIcon mr="1" mb="1" />
-                    {stats.location}
-                  </Text>
-                )}
+              {stats.location && (
+                <Text>
+                  <LocationIcon mr="1" mb="1" />
+                  {stats.location}
+                </Text>
+              )}
 
-                {stats.created_at && (
-                  <Text color="#5094F0">
-                    <CalendarIcon mr="1" mb="1" />
-                    Joined{' '}
-                    {new Date(stats.created_at).toLocaleDateString('en-US', {
-                      month: 'long',
-                      day: 'numeric',
-                      year: 'numeric'
-                    })}
-                  </Text>
-                )}
-              </div>
+              {stats.created_at && (
+                <Text>
+                  <CalendarIcon mr="1" mb="1" />
+                  Joined{' '}
+                  {new Date(stats.created_at).toLocaleDateString('en-US', {
+                    month: 'long',
+                    day: 'numeric',
+                    year: 'numeric'
+                  })}
+                </Text>
+              )}
 
               <Flex mt="3" direction="column">
                 <HStack>
@@ -121,15 +114,12 @@ const Statistics = ({ stats: userStats }) => {
                 </Flex>
               </Flex>
             </Box>
-
-            {/* </UserInfoStyles> */}
           </Box>
         )}
       </Box>
       <Flex alignItems="center" direction="column" wrap="wrap">
         <Box m="5" w="540px">
           <Image
-            // shadow="md"
             minW="100%"
             src={`https://github-readme-stats.vercel.app/api?username=${stats?.login}&show_icons=true`}
             alt={auth?.user?.username}
