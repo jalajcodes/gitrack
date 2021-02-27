@@ -1,4 +1,4 @@
-![gitrack](https://user-images.githubusercontent.com/17108695/109389356-320d7300-7932-11eb-8eb4-2e1e050e0362.png)
+![gitrack2](https://user-images.githubusercontent.com/17108695/109393323-fa5cf600-7946-11eb-8bdd-c28454786c6b.png)
 
 # GiTrack
 
