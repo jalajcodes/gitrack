@@ -28,26 +28,59 @@ const BoardWrapper = styled.div`
     -ms-overflow-style: none;
     scrollbar-width: none;
   }
-  .react-trello-board.cvXeTF::-webkit-scrollbar {
+  .react-trello-board.sc-jSgupP::-webkit-scrollbar {
     display: none;
   }
-  .gTkcFl.bHLLFS {
-    margin: 5px 0 0 43px;
+  .sc-hHftDr.sc-dmlrTW {
+    margin: 8px 0 0 60px;
     box-shadow: 0 4px 24px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
     background-color: #5094f0;
+    .sc-jcVebW {
+      background-color: transparent;
+
+      &:active {
+        outline: none;
+      }
+    }
   }
-  .hJAQWB {
-    background-color: transparent;
-  }
-  .sc-iBPRYJ.jyepsf {
+  /* .sc-iBPRYJ.jyepsf {
     margin-left: 15px;
-  }
-  .sc-fKFyDc.gviDcj {
+  } */
+  .sc-fKFyDc {
     box-shadow: 0 4px 24px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
     padding: 5px;
 
-    .sc-cBNfnY.boPdke {
-      background-color: #5094f0;
+    .sc-cBNfnY {
+      background-color: #171923;
+    }
+  }
+  .react-trello-lane.sc-iBPRYJ {
+    margin-left: 10px;
+  }
+
+  .sc-iBPRYJ {
+    box-shadow: 0 4px 24px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
+    padding: 5px;
+    margin-left: 60px;
+
+    .sc-cBNfnY {
+      background-color: #171923;
+    }
+  }
+
+  a.sc-idOhPF {
+    padding: 10px;
+    background-color: #171923;
+    text-align: center;
+    border-radius: 5px;
+    color: white;
+    transition: all 0.3s;
+    &:hover {
+      text-decoration: none;
+      background-color: #23242e;
+    }
+    &:active {
+      transform: scale(0.95);
     }
   }
 `;
