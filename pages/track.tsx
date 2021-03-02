@@ -155,14 +155,26 @@ const Kanban = () => {
           }
         });
       });
-      toast({
-        title: 'Sucess!',
-        description: 'Board updated successfully.',
-        status: 'success',
-        duration: 2000,
-        position: 'top',
-        isClosable: true
-      });
+
+      if (issues?.lanes[0]?.cards.length === 0) {
+        toast({
+          title: 'No issues found',
+          description: "You don't have any issues assigned to you currently.",
+          status: 'warning',
+          duration: 3000,
+          position: 'top',
+          isClosable: true
+        });
+      } else {
+        toast({
+          title: 'Sucess!',
+          description: 'Board updated successfully.',
+          status: 'success',
+          duration: 2000,
+          position: 'top',
+          isClosable: true
+        });
+      }
     }, 2000);
   };
 

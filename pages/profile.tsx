@@ -41,7 +41,6 @@ const Profile = () => {
           auth?.user?.token ? auth.user.token : userData.token,
           auth
         );
-        console.log(data);
         setStats(data);
         setLoading(false);
       }
