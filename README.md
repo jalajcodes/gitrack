@@ -1,3 +1,5 @@
+![gitrack2](https://user-images.githubusercontent.com/17108695/109393323-fa5cf600-7946-11eb-8bdd-c28454786c6b.png)
+
 # GiTrack
 
 Webiste for Open Source Enthusiasts to track their progress and statistics in a nice, easy to use environment.
