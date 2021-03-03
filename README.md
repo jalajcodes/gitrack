@@ -13,6 +13,7 @@ Webiste for Open Source Enthusiasts to track their progress and statistics in a 
 - Persistent board state, so no worries about accidently closing the page.
 - Beautiful UI
 - One Click Login using Github OAuth
+- Dark Mode
 
 ## Tech Stack 👩‍💻
 - Next JS
@@ -20,10 +21,5 @@ Webiste for Open Source Enthusiasts to track their progress and statistics in a 
 - AWS Amplify
 - Firebase
 - Chakra UI
-
-### Todo 📝
-- [ ] Dark Mode
-- [ ] Github Readme Maker
-- [ ] Voice Control
 
 > Logos, Icons and Illustrations are from Freepik.com, ChakraUI, Icomoon.io
