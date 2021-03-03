@@ -1,18 +1,23 @@
-import { Box, Button, Flex, Stack, Image } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Stack,
+  Image,
+  useColorModeValue
+} from '@chakra-ui/react';
 import { useAuth } from '@lib/auth';
 import { GithubIcon } from '@components/Icons';
 
 const Login = () => {
   const auth = useAuth();
+  const bg = useColorModeValue(['white', 'gray.100'], '#1A202C');
+  const bg2 = useColorModeValue('white', '#2D3748');
+
   return (
-    <Flex
-      align="center"
-      justify="center"
-      flex="1"
-      backgroundColor={['white', 'gray.100']}
-    >
+    <Flex align="center" justify="center" flex="1" backgroundColor={bg}>
       <Stack
-        backgroundColor="white"
+        backgroundColor={bg2}
         borderRadius={[0, 8]}
         maxWidth="400px"
         px={8}

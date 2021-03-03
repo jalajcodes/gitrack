@@ -10,7 +10,9 @@ const theme = {
     normal: 400,
     medium: 500,
     bold: 700
-  }
+  },
+  initialColorMode: 'light',
+  useSystemColorMode: false
 };
 
 export default theme;

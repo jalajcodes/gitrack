@@ -1,3 +1,4 @@
+import { useColorModeValue } from '@chakra-ui/color-mode';
 import { Image } from '@chakra-ui/image';
 import {
   Box,
@@ -11,6 +12,9 @@ import {
 import { CheckCircle } from '@components/Icons';
 
 const Home: React.VFC = () => {
+  const bg = useColorModeValue('white', '#2D3748');
+  const bg2 = useColorModeValue('white', '#1A202C');
+
   return (
     <>
       <Box
@@ -20,7 +24,7 @@ const Home: React.VFC = () => {
         justifyContent="center"
         w="full"
       >
-        <Box p="10" borderRadius="10px" boxShadow="md" bg="white">
+        <Box p="10" borderRadius="10px" boxShadow="md" bg={bg}>
           <Flex mt="-5" mb="-3" alignItems="center" justifyContent="center">
             <Image w="100px" src="./logo.png" />
           </Flex>
@@ -43,6 +47,8 @@ const Home: React.VFC = () => {
               shadow="lg"
               borderRadius="lg"
               padding="5"
+              mb={[5, 5, 0]}
+              bg={bg2}
             >
               <Image
                 m="auto"
@@ -72,7 +78,7 @@ const Home: React.VFC = () => {
                 </List>
               </Text>
             </Box>
-            <Box w={[250, 400]} p="5" shadow="lg" borderRadius="lg">
+            <Box bg={bg2} w={[250, 400]} p="5" shadow="lg" borderRadius="lg">
               <Image
                 m="auto"
                 mb="5"

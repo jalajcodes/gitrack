@@ -1,3 +1,4 @@
+import { useColorMode, useColorModeValue } from '@chakra-ui/color-mode';
 import { Image } from '@chakra-ui/image';
 import { Box, Flex, Heading, HStack, Text } from '@chakra-ui/layout';
 import { useAuth } from '@lib/auth';
@@ -6,6 +7,12 @@ import { CalendarIcon, LocationIcon, OrgIcon } from './Icons';
 const Statistics = ({ stats: userStats }) => {
   const stats = userStats.data;
   const auth = useAuth();
+  const { colorMode } = useColorMode();
+
+  const bg = useColorModeValue('white', '#2D3748');
+  const bg2 = useColorModeValue('gray.100', '#1A202C');
+
+  const iconFill = useColorModeValue('black', 'white');
 
   return (
     <Box w="full" display="grid" placeItems="center">
@@ -13,7 +20,7 @@ const Statistics = ({ stats: userStats }) => {
         maxWidth="800px"
         // height="240px"
         m="5"
-        bg="white"
+        bg={bg}
         shadow="md"
         borderRadius="md"
         overflow="hidden"
@@ -42,21 +49,21 @@ const Statistics = ({ stats: userStats }) => {
 
               {stats.company && (
                 <Text>
-                  <OrgIcon mr="1" mb="1" />
+                  <OrgIcon mr="1" mb="1" fill={iconFill} />
                   {stats.company}
                 </Text>
               )}
 
               {stats.location && (
                 <Text>
-                  <LocationIcon mr="1" mb="1" />
+                  <LocationIcon mr="1" mb="1" fill={iconFill} />
                   {stats.location}
                 </Text>
               )}
 
               {stats.created_at && (
                 <Text>
-                  <CalendarIcon mr="1" mb="1" />
+                  <CalendarIcon mr="1" mb="1" fill={iconFill} />
                   Joined{' '}
                   {new Date(stats.created_at).toLocaleDateString('en-US', {
                     month: 'long',
@@ -73,7 +80,7 @@ const Statistics = ({ stats: userStats }) => {
                     justifyContent="center"
                     shadow="md"
                     padding="3"
-                    bgColor="gray.100"
+                    bgColor={bg2}
                     transition="all .3s ease"
                     borderRadius="sm"
                     _hover={{ bgColor: '#EF5125', color: '#fff' }}
@@ -91,7 +98,7 @@ const Statistics = ({ stats: userStats }) => {
                     transition="all .3s ease"
                     borderRadius="sm"
                     _hover={{ bgColor: '#5094F0', color: '#fff' }}
-                    bgColor="gray.100"
+                    bgColor={bg2}
                   >
                     <Text>{stats.following.toLocaleString()}</Text>
                     <Text>&nbsp;Following</Text>
@@ -104,7 +111,7 @@ const Statistics = ({ stats: userStats }) => {
                   shadow="md"
                   padding="3"
                   mt="2"
-                  bgColor="gray.100"
+                  bgColor={bg2}
                   transition="all .3s ease"
                   borderRadius="sm"
                   _hover={{ bgColor: '#CC579E', color: '#fff' }}
@@ -121,21 +128,29 @@ const Statistics = ({ stats: userStats }) => {
         <Box m="5" w="540px">
           <Image
             minW="100%"
-            src={`https://github-readme-stats.vercel.app/api?username=${stats?.login}&show_icons=true`}
+            src={`https://github-readme-stats.vercel.app/api?username=${
+              stats?.login
+            }&show_icons=true${
+              colorMode === 'dark' ? '&theme=tokyonight' : ''
+            }`}
             alt={auth?.user?.username}
           />
         </Box>
         <Box m="5" w="540px">
           <Image
             minW="100%"
-            src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${stats?.login}&layout=compact`}
+            src={`https://github-readme-streak-stats.herokuapp.com/?user=${
+              stats?.login
+            }&layout=compact${colorMode === 'dark' ? '&theme=tokyonight' : ''}`}
             alt={auth?.user?.username}
           />
         </Box>
-        <Box m="5" mb="28" w="540px">
+        <Box m="5" w="540px" mb="28">
           <Image
             minW="100%"
-            src={`https://github-readme-streak-stats.herokuapp.com/?user=${stats?.login}&layout=compact`}
+            src={`https://github-readme-stats.vercel.app/api/top-langs/?username=${
+              stats?.login
+            }&layout=compact${colorMode === 'dark' ? '&theme=tokyonight' : ''}`}
             alt={auth?.user?.username}
           />
         </Box>

@@ -5,13 +5,62 @@ import {
   Avatar,
   Button,
   forwardRef,
-  Image
+  Image,
+  useColorMode,
+  useColorModeValue
 } from '@chakra-ui/react';
 import { useAuth } from '@lib/auth';
 import { motion, isValidMotionProp } from 'framer-motion';
 import NextLink from 'next/link';
 import { useEffect } from 'react';
 import Footer from './Footer';
+import styled from '@emotion/styled';
+
+const Toggle = styled.div`
+  input[type='checkbox'] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+  }
+
+  label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 80px;
+    height: 30px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    top: -12px;
+    left: -12px;
+  }
+
+  label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 21px;
+    height: 21px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+  }
+
+  input:checked + label {
+    background: #bada55;
+  }
+
+  input:checked + label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+  }
+
+  label:active:after {
+    width: 50px;
+  }
+`;
 
 const MotionFlex = motion.custom(
   forwardRef((props, ref) => {
@@ -25,6 +74,10 @@ const MotionFlex = motion.custom(
 
 const Layout: React.FC = ({ children }) => {
   const auth = useAuth();
+  const { toggleColorMode } = useColorMode();
+  const bgColor = useColorModeValue('gray.100', '#1A202C');
+  const navColor = useColorModeValue('white', '#2D3748');
+
   useEffect(() => {
     if (typeof window !== 'undefined') {
       window.addEventListener('error', function () {
@@ -40,10 +93,10 @@ const Layout: React.FC = ({ children }) => {
       minHeight="100vh"
       display="flex"
       flexDirection="column"
-      backgroundColor="gray.100"
+      backgroundColor={bgColor}
     >
       <Flex
-        backgroundColor="white"
+        backgroundColor={navColor}
         mb={4}
         w="full"
         borderTop="5px solid #5094F0"
@@ -93,6 +146,13 @@ const Layout: React.FC = ({ children }) => {
             )}
           </Flex>
           <Flex justifyContent="center" alignItems="center">
+            <Toggle>
+              <input type="checkbox" id="switch" />
+              <label onClick={toggleColorMode} htmlFor="switch">
+                Toggle
+              </label>
+            </Toggle>
+
             {!auth.user ? (
               <>
                 <NextLink href="/login" passHref>
@@ -129,32 +189,7 @@ const Layout: React.FC = ({ children }) => {
           </Flex>
         </Flex>
       </Flex>
-      <MotionFlex
-        key={Math.random() * 1000}
-        // initial="pageInitial"
-        // animate="pageAnimate"
-        // // exit="pageExit"
-        // variants={{
-        //   pageInitial: {
-        //     opacity: 0,
-        //     y: -30
-        //   },
-        //   pageAnimate: {
-        //     opacity: 1,
-        //     y: 0,
-        //     transition: {
-        //       duration: 0.5
-        //     }
-        //   }
-        // pageExit: {
-        //   opacity: 0,
-        //   y: 30,
-        //   transition: { duration: 0.5 }
-        // }
-        // }}
-      >
-        {children}
-      </MotionFlex>
+      <MotionFlex key={Math.random() * 1000}>{children}</MotionFlex>
       <Footer />
     </Box>
   );

@@ -10,15 +10,24 @@ import KanbanBoard from '@components/Kanban';
 import { Button } from '@chakra-ui/button';
 import { FetchIcon } from '@components/Icons';
 import styled from '@emotion/styled';
+import { useColorMode } from '@chakra-ui/color-mode';
 
-const BoardWrapper = styled.div`
+type BoardProps = {
+  dark: boolean;
+};
+const BoardWrapper = styled.div<BoardProps>`
   .react-trello-card {
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
     margin: 8px 8px 10px 8px;
+    ${(props) =>
+      props.dark ? 'background-color: #1A202C; border-bottom:none;' : ''}
+  }
+  .react-trello-card:hover {
+    ${(props) => (props.dark ? 'background-color: #282a2c' : '')}
   }
 
   .react-trello-lane.sc-iBPRYJ {
-    background-color: transparent;
+    background-color: ${(props) => (props.dark ? '#3D4756' : 'transparent')};
     box-shadow: 0 4px 24px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
     margin: 5px 25px 5px 0;
   }
@@ -30,7 +39,12 @@ const BoardWrapper = styled.div`
   }
   .react-trello-board.sc-jSgupP::-webkit-scrollbar {
     display: none;
+    background: transparent;
   }
+  .react-trello-board.sc-jSgupP::-webkit-scrollbar-track {
+    display: none;
+  }
+
   .sc-hHftDr.sc-dmlrTW {
     margin: 8px 0 0 60px;
     box-shadow: 0 4px 24px -1px rgb(0 0 0 / 10%), 0 2px 4px -1px rgb(0 0 0 / 6%);
@@ -83,6 +97,9 @@ const BoardWrapper = styled.div`
       transform: scale(0.95);
     }
   }
+  .sc-bBXqnf {
+    ${(props) => (props.dark ? 'color: white' : '')}
+  }
 `;
 
 const Kanban = () => {
@@ -92,6 +109,7 @@ const Kanban = () => {
   const router = useRouter();
   const auth = useAuth();
   const toast = useToast();
+  const { colorMode } = useColorMode();
 
   const setEventBus = (handle) => {
     setBus(handle);
@@ -228,7 +246,7 @@ const Kanban = () => {
             <Spinner size="xl" />
           </Box>
         ) : (
-          <BoardWrapper>
+          <BoardWrapper dark={colorMode === 'dark' ? true : false}>
             <KanbanBoard eventBusHandle={setEventBus} />
           </BoardWrapper>
         )}
